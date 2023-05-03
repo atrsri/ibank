@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
@@ -22,7 +23,7 @@ import com.bnp.studio.ibank.service.AccountsService;
 import com.bnp.studio.ibank.service.BeneficiaryService;
 import com.bnp.studio.ibank.service.TransactionService;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class) commented for java 8 compatibility
 public class IBankControllerTest {
 
 	@Mock
@@ -47,6 +48,7 @@ public class IBankControllerTest {
 
 	@BeforeEach
 	void initAll() {
+		MockitoAnnotations.openMocks(this);//added for java 8 compatibility
 		//iBankController = new IBankController();
 		acc = new Accounts();
 		acc.setId(1);

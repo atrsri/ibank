@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.bnp.studio.ibank.model.AccountBalance;
@@ -19,7 +20,7 @@ import com.bnp.studio.ibank.model.Beneficiary;
 import com.bnp.studio.ibank.model.Transactions;
 import com.bnp.studio.ibank.repository.AccountsRepo;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
 class AccountsServiceTest {
 	@InjectMocks
 	AccountsService accountsServiceMock = new AccountsServiceImpl();
@@ -35,6 +36,7 @@ class AccountsServiceTest {
 	@BeforeEach
 	void initAll() {
 		//iBankController = new IBankController();
+		MockitoAnnotations.openMocks(this);
 		acc = new Accounts();
 		acc.setId(1);
 		acc.setAccName("Vinod");

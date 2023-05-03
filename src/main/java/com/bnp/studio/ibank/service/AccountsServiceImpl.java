@@ -14,18 +14,21 @@ public class AccountsServiceImpl implements AccountsService{
 	@Autowired
 	AccountsRepo accountsRepo;
 
-	@Override
 	public Accounts addAccounts(Accounts acc) {
 		return accountsRepo.save(acc);
 		
 	}
 
-	@Override
 	public Accounts findById(int id) {
 		Optional<Accounts> oAcc =  accountsRepo.findById(id);
 		if(oAcc.isPresent())
 			return oAcc.get();
-		return null;
+		else {
+			Accounts acc = new Accounts();
+			acc.setId(-1);
+			acc.setStatus("Inactive");
+			return acc;
+		}
 	}
 
 }

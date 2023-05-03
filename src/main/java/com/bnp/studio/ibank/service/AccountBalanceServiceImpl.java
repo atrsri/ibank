@@ -1,5 +1,7 @@
 package com.bnp.studio.ibank.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +14,21 @@ public class AccountBalanceServiceImpl implements AccountBalanceService{
 	@Autowired
 	AccountBalanceRepo accountBalanceRepo;
 
-	@Override
 	public AccountBalance findAccountBalance(int id) {
-		return accountBalanceRepo.findByAccountId(id);
+		 Optional<AccountBalance> oacb =  Optional.ofNullable(accountBalanceRepo.findByAccountId(id));
+		 if(oacb.isPresent()) {
+			 return oacb.get();
+		 } else {
+			 AccountBalance acb = new AccountBalance();
+			 acb.setId(-1);
+			 return acb;
+		 }
 	}
 
-	@Override
 	public int updateAccountBalance(double balance, int id) {
 		return accountBalanceRepo.updateAccountBalance(balance, id);
 	}
 
-	@Override
 	public AccountBalance addBalance(AccountBalance acb) {
 		return accountBalanceRepo.save(acb);
 	}
